@@ -7,4 +7,6 @@ This is my first repo, navigating github
 * l
 
 
-### 3rd Heading
+### GIST
+Example
+[mycode](https://gist.github.com/Venkatesh-Sathya/627db94912e5886beedcf983fbf6681d)
