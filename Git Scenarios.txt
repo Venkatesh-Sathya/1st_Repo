@@ -1,0 +1,68 @@
+=======================================================================
+                        THE ULTIMATE GIT CHEAT SHEET
+=======================================================================
+
+-----------------------------------------------------------------------
+⚙️ 1. THE "SET IT & FORGET IT" CONFIGURATIONS (Run Once)
+-----------------------------------------------------------------------
+git config --global pull.rebase true  # Automatically keeps history straight on pull
+git config --global alias.undo "reset --hard HEAD~1"  # Creates 'git undo' shortcut
+
+-----------------------------------------------------------------------
+🆕 SCENARIO 1: Starting a Brand New Feature from Scratch
+-----------------------------------------------------------------------
+git switch dev                 # 1. Go to the team's playground branch
+git pull                       # 2. Get the latest code everyone else wrote
+git switch -c feature/name     # 3. Create your new private branch and jump in
+
+-----------------------------------------------------------------------
+🔄 SCENARIO 2: Continuing an Existing Branch (That is Old on Your PC)
+-----------------------------------------------------------------------
+git switch lab2-doc            # 1. Switch to your local branch
+git pull origin lab2-doc       # 2. Force your PC to grab the latest cloud edits
+
+-----------------------------------------------------------------------
+🗺️ SCENARIO 3: Branch Created on GitHub (But Not on Your PC Yet)
+-----------------------------------------------------------------------
+git fetch origin               # 1. Update your local blueprint map from the cloud
+git switch lab2-doc            # 2. Automatically creates and enters a tracking branch
+
+-----------------------------------------------------------------------
+🚂 SCENARIO 4: Catching Up to the Team's Shared Progress (dev)
+-----------------------------------------------------------------------
+git switch dev                 # 1. Briefly hop over to dev
+git pull                       # 2. Download the newest team features
+git switch lab2-doc            # 3. Go back to your feature branch
+git merge dev                  # 4. Inject those dev changes into your work
+
+--- HOW COMMITS ALIGN IN SCENARIO 4 ---
+
+OPTION A: The Merge Way (git merge dev)
+Creates a junction point (Merge Commit) that ties the branches together.
+dev:      [Base] ---> [Team Commit A] ---> [Team Commit B]
+                       \                                   \
+lab2-doc:               └───> [Your Commit 1] -------------> [MERGE COMMIT]
+
+OPTION B: The Rebase Way (git rebase dev)
+Lifts your commit, slides team changes underneath, drops yours on top.
+dev:      [Base] ---> [Team Commit A] ---> [Team Commit B]
+                                                           \
+lab2-doc:                                                   └───> [Your Commit 1]
+
+-----------------------------------------------------------------------
+⚠️ SCENARIO 5: Someone Pushed Before You (The Blocked Push)
+-----------------------------------------------------------------------
+git pull --rebase origin lab2-doc  # 1. Lift your commits, slide theirs under
+git push                           # 2. Push successfully without a messy merge
+
+-----------------------------------------------------------------------
+🚨 SCENARIO 6: The "Oh Crap, I Messed Up" Reset
+-----------------------------------------------------------------------
+git reset --hard HEAD~1        # Erases your last local commit completely
+# OR (if using the shortcut from section 1):
+git undo
+
+# To wipe everything and completely match GitHub exactly:
+git fetch origin
+git reset --hard origin/lab2-doc
+=======================================================================
